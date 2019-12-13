@@ -1,0 +1,9 @@
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
+  jpa:
+    hibernate:
+      ddl-auto: create

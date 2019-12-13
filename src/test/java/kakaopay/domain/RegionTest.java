@@ -18,4 +18,13 @@ class RegionTest {
         assertThat(region.getCode()).isEqualTo(code);
         assertThat(region.getName()).isEqualTo(name);
     }
+
+    @Test
+    void createNewRegion() {
+        String name = "name";
+
+        Region region = Region.createRegion(name);
+
+        assertThat(region.getCode()).isNotNull();
+    }
 }

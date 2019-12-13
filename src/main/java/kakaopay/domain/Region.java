@@ -2,6 +2,7 @@ package kakaopay.domain;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 public class Region {
@@ -13,6 +14,14 @@ public class Region {
     private String name;
 
     private Region() {
+    }
+
+    public static Region createRegion(String regionName) {
+        String code = String.valueOf(UUID.randomUUID());
+        return new Builder()
+                .name(regionName)
+                .code(code)
+                .build();
     }
 
     public Long getId() {
