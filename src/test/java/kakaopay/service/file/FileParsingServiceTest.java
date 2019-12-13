@@ -1,9 +1,8 @@
 package kakaopay.service.file;
 
 import kakaopay.domain.Region;
-import kakaopay.domain.RegionRepository;
 import kakaopay.domain.RegionSupportInformation;
-import kakaopay.domain.RegionSupportInformationRepository;
+import kakaopay.dto.RegionSupportInfoResponseDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,26 +14,24 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class FileParsingInternalServiceTest {
+class FileParsingServiceTest {
     @Mock
-    private RegionRepository regionRepository;
-
-    @Mock
-    private RegionSupportInformationRepository regionSupportInformationRepository;
-
-    @InjectMocks
     private FileParsingInternalService fileParsingInternalService;
+    @InjectMocks
+    private FileParsingService fileParsingService;
 
     @Test
     void parsingCsvFile() throws IOException {
+        MultipartFile file = new MockMultipartFile("test.csv", new FileInputStream(new File("src/test/resources/test.csv")));
+
         String name = "name";
         String target = "target";
         String institute = "institute";
@@ -58,13 +55,10 @@ class FileParsingInternalServiceTest {
                         .usage(usage)
                         .build();
 
-        MultipartFile file = new MockMultipartFile("test.csv", new FileInputStream(new File("src/test/resources/test.csv")));
+        when(fileParsingInternalService.parsingCsvFile(any())).thenReturn(Arrays.asList(regionSupportInformation));
 
-        when(regionRepository.findByName(any())).thenReturn(Optional.ofNullable(region));
-        when(regionSupportInformationRepository.save(any())).thenReturn(regionSupportInformation);
+        List<RegionSupportInfoResponseDto> responseDtos = fileParsingService.parsingCsvFile(file);
 
-        List<RegionSupportInformation> regionSupportInformations = fileParsingInternalService.parsingCsvFile(file);
-
-        assertThat(regionSupportInformations.contains(regionSupportInformation)).isTrue();
+        assertThat(responseDtos.get(0).getRegion()).isEqualTo(name);
     }
 }
