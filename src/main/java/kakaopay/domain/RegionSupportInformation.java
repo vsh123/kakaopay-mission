@@ -18,7 +18,7 @@ public class RegionSupportInformation {
     private Region region;
     private String target;
     private String usage;
-    private String limit;
+    private String limitPay;
     private String rate;
     private String institute;
     private String mgmt;
