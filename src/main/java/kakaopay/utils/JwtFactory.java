@@ -27,7 +27,7 @@ public class JwtFactory {
             token = JWT.create()
                     .withIssuer(jwtConfig.getIssuer())
                     .withClaim("userId", account.getUserId())
-                    .withClaim("createDate", new Date())
+                    .withClaim("createdDate", new Date())
                     .sign(generateAlgorithm());
         } catch (IllegalArgumentException e) {
             throw new JwtCreateException();
