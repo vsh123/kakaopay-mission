@@ -26,7 +26,11 @@ public class RegionSupInfoService {
 
     public List<RegionNameResponseDto> findTopOf(int numberOfRegionSupInfos) {
         return regionSupInfoInternalService.findTopOf(numberOfRegionSupInfos).stream()
-                .map(regionSupInfo -> RegionConverter.toREgionNameResponseDto(regionSupInfo.getRegion()))
+                .map(regionSupInfo -> RegionConverter.toRegionNameResponseDto(regionSupInfo.getRegion()))
                 .collect(Collectors.toList());
+    }
+
+    public RegionNameResponseDto findMinRate() {
+        return RegionConverter.toRegionNameResponseDto(regionSupInfoInternalService.findMinRateInfo().getRegion());
     }
 }

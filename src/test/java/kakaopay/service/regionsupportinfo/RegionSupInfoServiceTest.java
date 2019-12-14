@@ -78,4 +78,19 @@ class RegionSupInfoServiceTest {
         assertThat(actualResult.size()).isEqualTo(1);
         assertThat(actualResult.get(0).getRegion()).isEqualTo(name);
     }
+
+    @Test
+    void 보전_비율_가장_작은_추천_기관명_테스트() {
+
+        String name = "name";
+        Region region = Region.createRegion(name);
+        RegionSupportInformation regionSupportInformation = new RegionSupportInformation.Builder()
+                .region(region)
+                .build();
+        when(regionSupInfoInternalService.findMinRateInfo()).thenReturn(regionSupportInformation);
+
+        RegionNameResponseDto actualResult = regionSupInfoService.findMinRate();
+
+        assertThat(actualResult.getRegion()).isEqualTo(name);
+    }
 }

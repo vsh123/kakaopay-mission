@@ -10,7 +10,7 @@ class RegionConverterTest {
     void toRegionNameResponseDto() {
         String name = "name";
         Region region = Region.createRegion(name);
-        RegionNameResponseDto result = RegionConverter.toREgionNameResponseDto(region);
+        RegionNameResponseDto result = RegionConverter.toRegionNameResponseDto(region);
 
         assertThat(result.getRegion()).isEqualTo(name);
     }
