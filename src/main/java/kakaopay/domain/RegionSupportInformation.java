@@ -1,5 +1,7 @@
 package kakaopay.domain;
 
+import org.springframework.util.StringUtils;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -21,6 +23,50 @@ public class RegionSupportInformation {
 
     private RegionSupportInformation() {
     }
+
+    public void updateTarget(String target) {
+        if (!StringUtils.isEmpty(target)) {
+            this.target = target;
+        }
+    }
+
+    public void updateRate(String rate) {
+        if (!StringUtils.isEmpty(rate)) {
+            this.rate = rate;
+        }
+    }
+
+    public void updateUsage(String usage) {
+        if (!StringUtils.isEmpty(usage)) {
+            this.usage = usage;
+        }
+    }
+
+    public void updateLimitPay(String limitPay) {
+        if (!StringUtils.isEmpty(limitPay)) {
+            this.limitPay = limitPay;
+        }
+    }
+
+    public void updateInstitute(String institute) {
+        if (!StringUtils.isEmpty(institute)) {
+            this.institute = institute;
+        }
+    }
+
+    public void updateMgmt(String mgmt) {
+        if (!StringUtils.isEmpty(mgmt)) {
+            this.mgmt = mgmt;
+        }
+    }
+
+    public void updateReception(String reception) {
+        if (!StringUtils.isEmpty(reception)) {
+            this.reception = reception;
+        }
+
+    }
+
 
     public Long getId() {
         return id;
