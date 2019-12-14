@@ -26,6 +26,19 @@ class RegionSupInfoControllerTest extends CommonControllerTest {
     }
 
     @Test
+    void findMinRate() {
+        RegionNameResponseDto result = webTestClient.get()
+                .uri(BASE_URI + "/min")
+                .exchange()
+                .expectBody(RegionNameResponseDto.class)
+                .returnResult()
+                .getResponseBody();
+
+
+        assertThat(result.getRegion()).isEqualTo("11");
+    }
+
+    @Test
     void updateTest() {
         String target = "updateTarget";
         String usage = "updateUsage";

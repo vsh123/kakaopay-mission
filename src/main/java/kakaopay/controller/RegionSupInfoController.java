@@ -25,6 +25,11 @@ public class RegionSupInfoController {
         return ResponseEntity.ok(regionSupInfoService.findTopOf(numberOfRegionSupInfos));
     }
 
+    @GetMapping("/api/regionsupinfos/min")
+    public ResponseEntity<RegionNameResponseDto> findMinRate() {
+        return ResponseEntity.ok(regionSupInfoService.findMinRate());
+    }
+
     @PutMapping("/api/regionsupinfos")
     public ResponseEntity<RegionSupportInfoResponseDto> update(RegionSupInfoUpdateRequestDto requestDto) {
         return ResponseEntity.ok(regionSupInfoService.update(requestDto));
