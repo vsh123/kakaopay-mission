@@ -3,7 +3,7 @@ package kakaopay.utils;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import kakaopay.domain.Account;
-import kakaopay.exception.JwtTokenCreateException;
+import kakaopay.exception.JwtCreateException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,7 +23,7 @@ public class JwtFactory {
                     .withClaim("userId", account.getUserId())
                     .sign(generateAlgorithm());
         } catch (IllegalArgumentException e) {
-            throw new JwtTokenCreateException();
+            throw new JwtCreateException();
         }
         return token;
     }
