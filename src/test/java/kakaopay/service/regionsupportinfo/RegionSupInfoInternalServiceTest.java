@@ -3,6 +3,7 @@ package kakaopay.service.regionsupportinfo;
 import kakaopay.domain.Region;
 import kakaopay.domain.RegionSupportInformation;
 import kakaopay.domain.RegionSupportInformationRepository;
+import kakaopay.dto.RegionSupInfoUpdateRequestDto;
 import kakaopay.exception.NotFoundRegionSupportInformationException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,5 +41,22 @@ class RegionSupInfoInternalServiceTest {
 
         RegionSupportInformation actualRegionSupportInformation = regionSupInfoInternalService.findByRegionCode(region.getCode());
         assertThat(actualRegionSupportInformation.getRegion().getCode()).isEqualTo(region.getCode());
+    }
+
+    @Test
+    void updateTest() {
+        Region region = Region.createRegion("name");
+        RegionSupportInformation regionSupportInformation = new RegionSupportInformation.Builder()
+                .region(region)
+                .build();
+        RegionSupInfoUpdateRequestDto requestDto =
+                new RegionSupInfoUpdateRequestDto(region.getName(), "target", "usage", "limitPay", "rate",
+                        "institute", "mgmt", "reception");
+
+        when(regionSupportInformationRepository.findByRegionCode(region.getCode())).thenReturn(Optional.ofNullable(regionSupportInformation));
+
+        RegionSupportInformation updateRegionSupInfo = regionSupInfoInternalService.update(region, requestDto);
+        assertThat(updateRegionSupInfo.getTarget()).isEqualTo("target");
+        assertThat(updateRegionSupInfo.getReception()).isEqualTo("reception");
     }
 }
