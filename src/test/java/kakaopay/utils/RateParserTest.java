@@ -15,8 +15,7 @@ class RateParserTest {
         Rate rate = RateParser.parse(rateInfo);
 
         assertThat(rate.getRateInfo()).isEqualTo(rateInfo);
-        assertThat(rate.getMinRate()).isEqualTo(0);
-        assertThat(rate.getMaxRate()).isEqualTo(0);
+        assertThat(rate.getAverageRate()).isEqualTo(0);
     }
 
     @Test
@@ -25,8 +24,7 @@ class RateParserTest {
         Rate rate = RateParser.parse(rateInfo);
 
         assertThat(rate.getRateInfo()).isEqualTo(rateInfo);
-        assertThat(rate.getMinRate()).isEqualTo(3.0);
-        assertThat(rate.getMaxRate()).isEqualTo(3.0);
+        assertThat(rate.getAverageRate()).isEqualTo(3.0);
     }
 
     @Test
@@ -35,8 +33,7 @@ class RateParserTest {
         Rate rate = RateParser.parse(rateInfo);
 
         assertThat(rate.getRateInfo()).isEqualTo(rateInfo);
-        assertThat(rate.getMinRate()).isEqualTo(3.0);
-        assertThat(rate.getMaxRate()).isEqualTo(5.0);
+        assertThat(rate.getAverageRate()).isEqualTo(4.0);
     }
 
     @Test
