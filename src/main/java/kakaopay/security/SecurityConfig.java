@@ -1,7 +1,9 @@
 package kakaopay.security;
 
 import kakaopay.security.filter.JwtAuthenticationFilter;
+import kakaopay.security.filter.JwtRefreshFilter;
 import kakaopay.security.provider.JwtAuthenticationProvider;
+import kakaopay.security.provider.JwtRefreshProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,10 +23,13 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
+    private final JwtRefreshProvider jwtRefreshProvider;
 
-    public SecurityConfig(JwtAuthenticationProvider jwtAuthenticationProvider) {
+    public SecurityConfig(JwtAuthenticationProvider jwtAuthenticationProvider, JwtRefreshProvider jwtRefreshProvider) {
         this.jwtAuthenticationProvider = jwtAuthenticationProvider;
+        this.jwtRefreshProvider = jwtRefreshProvider;
     }
+
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
@@ -36,6 +41,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    public JwtRefreshFilter jwtRefreshFilter() throws Exception {
+        JwtRefreshFilter jwtRefreshFilter = new JwtRefreshFilter("/api/refresh");
+        jwtRefreshFilter.setAuthenticationManager(super.authenticationManagerBean());
+
+        return jwtRefreshFilter;
+    }
+
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -43,7 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .authenticationProvider(jwtAuthenticationProvider);
+                .authenticationProvider(jwtAuthenticationProvider)
+                .authenticationProvider(jwtRefreshProvider);
     }
 
     @Override
@@ -56,7 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/signup", "/api/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtRefreshFilter(), JwtAuthenticationFilter.class);
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
