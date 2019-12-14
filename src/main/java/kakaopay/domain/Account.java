@@ -22,6 +22,10 @@ public class Account {
         this.password = password;
     }
 
+    public boolean isCorrectPassword(String encryptedPassword) {
+        return this.password.equals(encryptedPassword);
+    }
+
     public Long getId() {
         return id;
     }
@@ -55,4 +59,5 @@ public class Account {
                 ", password='" + password + '\'' +
                 '}';
     }
+
 }

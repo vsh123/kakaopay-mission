@@ -4,6 +4,8 @@ import kakaopay.domain.Account;
 import kakaopay.domain.AccountRepository;
 import kakaopay.dto.AccountDto;
 import kakaopay.exception.AlreadyExistUserIdException;
+import kakaopay.exception.IllegalPasswordException;
+import kakaopay.exception.NotFoundAccountException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,5 +32,18 @@ public class AccountInternalService {
         Account account = new Account(userId, encryptedPassword);
 
         return accountRepository.save(account);
+    }
+
+    public Account login(AccountDto accountDto) {
+        String userId = accountDto.getUserId();
+        String encryptedPassword = passwordEncoder.encode(accountDto.getPassword());
+
+        Account account = accountRepository.findByUserId(userId)
+                .orElseThrow(NotFoundAccountException::new);
+        if (!account.isCorrectPassword(encryptedPassword)) {
+            throw new IllegalPasswordException();
+        }
+
+        return account;
     }
 }
