@@ -39,7 +39,7 @@ public class RegionSupInfoInternalService {
 
     @Transactional(readOnly = true)
     public RegionSupportInformation findMinRateInfo() {
-        return regionSupportInformationRepository.findFirstByOrderByRateMinRateAsc()
+        return regionSupportInformationRepository.findFirstByOrderByRateAverageRateAsc()
                 .orElseThrow(NotFoundRegionSupportInformationException::new);
     }
 

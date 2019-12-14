@@ -10,18 +10,18 @@ public class RateParser {
 
     public static Rate parse(String rateInfo) {
         if (rateInfo.matches(ALL_RATE)) {
-            return new Rate(rateInfo, 0, 0, 0);
+            return new Rate(rateInfo, 0);
         }
         if (rateInfo.matches(SINGLE_RATE_REGEX)) {
             double rate = Double.parseDouble(rateInfo.replace("%", ""));
-            return new Rate(rateInfo, rate, rate, rate);
+            return new Rate(rateInfo, rate);
         }
         if (rateInfo.matches(RANGE_RATE_REGEX)) {
             String[] rates = rateInfo.replaceAll("%", "").split("~");
             double minRate = Double.parseDouble(rates[0]);
             double maxRate = Double.parseDouble(rates[1]);
 
-            return new Rate(rateInfo, minRate, maxRate, (minRate + maxRate) / 2);
+            return new Rate(rateInfo, (minRate + maxRate) / 2);
         }
         throw new ParsingRateException();
     }

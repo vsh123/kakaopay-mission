@@ -12,5 +12,5 @@ public interface RegionSupportInformationRepository extends JpaRepository<Region
 
     Page<RegionSupportInformation> findAll(Pageable pageable);
 
-    Optional<RegionSupportInformation> findFirstByOrderByRateMinRateAsc();
+    Optional<RegionSupportInformation> findFirstByOrderByRateAverageRateAsc();
 }
