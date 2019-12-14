@@ -15,10 +15,10 @@ class FileUploadControllerTest extends CommonControllerTest {
     @Test
     void csv파일_파싱_테스트() {
         File file = new File("src/test/resources/test.csv");
-
         List<RegionSupportInfoResponseDto> responseDtos = webTestClient.post()
                 .uri("/api/upload")
                 .contentType(MULTIPART_FORM_DATA)
+                .header(AUTHRIZATION_HEADER, PREFIX + token)
                 .body(BodyInserters.fromMultipartData("file", new FileSystemResource(file)))
                 .exchange()
                 .expectBodyList(RegionSupportInfoResponseDto.class)

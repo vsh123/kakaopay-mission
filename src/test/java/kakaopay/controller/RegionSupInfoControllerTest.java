@@ -17,6 +17,7 @@ class RegionSupInfoControllerTest extends CommonControllerTest {
     void findTopOf() {
         List<RegionNameResponseDto> result = webTestClient.get()
                 .uri(BASE_URI + "?k=2")
+                .header(AUTHRIZATION_HEADER, PREFIX + token)
                 .exchange()
                 .expectBodyList(RegionNameResponseDto.class)
                 .returnResult()
@@ -29,6 +30,7 @@ class RegionSupInfoControllerTest extends CommonControllerTest {
     void findMinRate() {
         RegionNameResponseDto result = webTestClient.get()
                 .uri(BASE_URI + "/min")
+                .header(AUTHRIZATION_HEADER, PREFIX + token)
                 .exchange()
                 .expectBody(RegionNameResponseDto.class)
                 .returnResult()
@@ -46,6 +48,7 @@ class RegionSupInfoControllerTest extends CommonControllerTest {
 
         RegionSupportInfoResponseDto responseDto = webTestClient.put()
                 .uri(BASE_URI)
+                .header(AUTHRIZATION_HEADER, PREFIX + token)
                 .body(BodyInserters.fromFormData("region", "업데이트시")
                         .with("target", target)
                         .with("usage", usage)

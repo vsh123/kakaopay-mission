@@ -7,3 +7,5 @@ insert into region_support_information(region_code,target,usage,limit_support,li
 insert into region_support_information(region_code,target,usage,limit_support,limit_pay,rate_info,avg_rate,institute,mgmt,reception) values(2,'target','usage','limitpay','2000','4%',4.0,'institute','mgmt','reception')
 insert into region_support_information(region_code,target,usage,limit_support,limit_pay,rate_info,avg_rate,institute,mgmt,reception) values(3,'target','usage','limitpay','3000','4%',4.0,'institute','mgmt','reception')
 insert into region_support_information(region_code,target,usage,limit_support,limit_pay,rate_info,avg_rate,institute,mgmt,reception) values(4,'target','usage','limitpay','1000','1%',1.0,'institute','mgmt','reception')
+
+insert into account(user_id, password) values('van', '$2a$10$bk/ga.DFVcPwItcTKVWHxe/nJ9Dwj.vqu7NeDG8XHjpceoI9wJGMW')

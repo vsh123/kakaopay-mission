@@ -11,6 +11,7 @@ class SearchControllerTest extends CommonControllerTest {
     void findByRegionName() {
         RegionSupportInfoResponseDto responseDto = webTestClient.get()
                 .uri("/api/regionsupinfos/search?region=강릉시")
+                .header(AUTHRIZATION_HEADER, PREFIX + token)
                 .exchange()
                 .expectBody(RegionSupportInfoResponseDto.class)
                 .returnResult()

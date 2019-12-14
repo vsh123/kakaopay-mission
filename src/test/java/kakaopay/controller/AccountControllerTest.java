@@ -24,7 +24,6 @@ class AccountControllerTest extends CommonControllerTest {
     void 로그인_테스트() {
         String userId = "van";
         String password = "van";
-        signUp(userId, password);
         String token = webTestClient.post()
                 .uri("/api/login")
                 .body(BodyInserters.fromFormData("userId", userId)
@@ -35,15 +34,6 @@ class AccountControllerTest extends CommonControllerTest {
                 .getResponseBody();
 
         assertThat(token.split("\\.").length).isEqualTo(3);
-
-    }
-
-    public void signUp(String userId, String password) {
-        webTestClient.post()
-                .uri("/api/signup")
-                .body(BodyInserters.fromFormData("userId", userId)
-                        .with("password", password))
-                .exchange();
 
     }
 }
