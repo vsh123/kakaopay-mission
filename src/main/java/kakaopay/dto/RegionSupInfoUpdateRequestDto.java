@@ -4,7 +4,7 @@ public class RegionSupInfoUpdateRequestDto {
     private String region;
     private String target;
     private String usage;
-    private String limitPay;
+    private String limit;
     private String rate;
     private String institute;
     private String mgmt;
@@ -13,11 +13,11 @@ public class RegionSupInfoUpdateRequestDto {
     private RegionSupInfoUpdateRequestDto() {
     }
 
-    public RegionSupInfoUpdateRequestDto(String region, String target, String usage, String limitPay, String rate, String institute, String mgmt, String reception) {
+    public RegionSupInfoUpdateRequestDto(String region, String target, String usage, String limit, String rate, String institute, String mgmt, String reception) {
         this.region = region;
         this.target = target;
         this.usage = usage;
-        this.limitPay = limitPay;
+        this.limit = limit;
         this.rate = rate;
         this.institute = institute;
         this.mgmt = mgmt;
@@ -48,12 +48,12 @@ public class RegionSupInfoUpdateRequestDto {
         this.usage = usage;
     }
 
-    public String getLimitPay() {
-        return limitPay;
+    public String getLimit() {
+        return limit;
     }
 
-    public void setLimitPay(String limitPay) {
-        this.limitPay = limitPay;
+    public void setLimit(String limit) {
+        this.limit = limit;
     }
 
     public String getRate() {

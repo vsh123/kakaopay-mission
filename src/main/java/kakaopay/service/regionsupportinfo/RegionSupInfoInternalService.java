@@ -32,7 +32,7 @@ public class RegionSupInfoInternalService {
     private void updateEntity(RegionSupInfoUpdateRequestDto updateRequestDto, RegionSupportInformation regionSupportInformation) {
         regionSupportInformation.updateTarget(updateRequestDto.getTarget());
         regionSupportInformation.updateUsage(updateRequestDto.getUsage());
-        regionSupportInformation.updateLimitPay(updateRequestDto.getLimitPay());
+        regionSupportInformation.updateLimitPay(updateRequestDto.getLimit());
         regionSupportInformation.updateRate(updateRequestDto.getRate());
         regionSupportInformation.updateInstitute(updateRequestDto.getInstitute());
         regionSupportInformation.updateMgmt(updateRequestDto.getMgmt());
