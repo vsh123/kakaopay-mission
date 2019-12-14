@@ -9,8 +9,13 @@ import javax.persistence.Embeddable;
 public class Rate {
     @Column(name = "rate_info")
     private String rateInfo;
+    @Column(name = "min_sup_rate")
     private double minRate;
+    @Column(name = "max_sup_rate")
     private double maxRate;
+
+    private Rate() {
+    }
 
     public Rate(String rateInfo, double minRate, double maxRate) {
         this.rateInfo = rateInfo;

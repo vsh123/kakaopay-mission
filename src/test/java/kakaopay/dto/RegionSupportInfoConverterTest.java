@@ -14,7 +14,7 @@ class RegionSupportInfoConverterTest {
         String institute = "institute";
         String limitPay = "1억원 이내";
         String mgmt = "mgmt";
-        String rate = "rate";
+        String rate = "3%";
         String reception = "reception";
         String usage = "usage";
 

@@ -17,7 +17,7 @@ public class RegionSupportInformation {
     private String usage;
     @Embedded
     private LimitPay limitPay;
-    private String rate;
+    private Rate rate;
     private String institute;
     private String mgmt;
     private String reception;
@@ -33,7 +33,7 @@ public class RegionSupportInformation {
 
     public void updateRate(String rate) {
         if (!StringUtils.isEmpty(rate)) {
-            this.rate = rate;
+            this.rate = Rate.createRate(rate);
         }
     }
 
@@ -88,7 +88,7 @@ public class RegionSupportInformation {
         return limitPay;
     }
 
-    public String getRate() {
+    public Rate getRate() {
         return rate;
     }
 
@@ -137,7 +137,7 @@ public class RegionSupportInformation {
         private String target;
         private String usage;
         private LimitPay limitPay;
-        private String rate;
+        private Rate rate;
         private String institute;
         private String mgmt;
         private String reception;
@@ -163,7 +163,7 @@ public class RegionSupportInformation {
         }
 
         public Builder rate(String rate) {
-            this.rate = rate;
+            this.rate = Rate.createRate(rate);
             return this;
         }
 

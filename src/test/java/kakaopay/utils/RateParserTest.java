@@ -14,7 +14,7 @@ class RateParserTest {
         String rateInfo = "3%";
         Rate rate = RateParser.parse(rateInfo);
 
-        assertThat(rate.getRate()).isEqualTo(rateInfo);
+        assertThat(rate.getRateInfo()).isEqualTo(rateInfo);
         assertThat(rate.getMinRate()).isEqualTo(3.0);
         assertThat(rate.getMaxRate()).isEqualTo(3.0);
     }
@@ -24,7 +24,7 @@ class RateParserTest {
         String rateInfo = "3%~5%";
         Rate rate = RateParser.parse(rateInfo);
 
-        assertThat(rate.getRate()).isEqualTo(rateInfo);
+        assertThat(rate.getRateInfo()).isEqualTo(rateInfo);
         assertThat(rate.getMinRate()).isEqualTo(3.0);
         assertThat(rate.getMaxRate()).isEqualTo(5.0);
     }

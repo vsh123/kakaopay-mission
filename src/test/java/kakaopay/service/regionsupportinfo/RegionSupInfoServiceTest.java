@@ -28,7 +28,7 @@ class RegionSupInfoServiceTest {
         String target = "target";
         String usage = "usage";
         String limitPay = "1억원 이내";
-        String rate = "rate";
+        String rate = "3%";
         String institute = "institute";
         String mgmt = "mgmt";
         String reception = "reception";
