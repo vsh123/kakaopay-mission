@@ -32,6 +32,7 @@ class FileUploadControllerTest {
                 .returnResult()
                 .getResponseBody();
 
-        assertThat(responseDtos.size()).isEqualTo(98);
+        assertThat(responseDtos.size()).isEqualTo(1);
+        assertThat(responseDtos.get(0).getRegion()).isEqualTo("test");
     }
 }
