@@ -1,0 +1,3 @@
+jwt:
+  sign_key: shakevan
+  issuer: shakevan
