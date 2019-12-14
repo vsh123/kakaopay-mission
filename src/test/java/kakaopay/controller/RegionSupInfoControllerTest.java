@@ -13,10 +13,11 @@ class RegionSupInfoControllerTest extends CommonControllerTest {
 
     public static final String BASE_URI = "/api/regionsupinfos";
 
+
     @Test
     void findTopOf() {
         List<RegionNameResponseDto> result = webTestClient.get()
-                .uri(BASE_URI + "?k=2")
+                .uri(BASE_URI + "/rank?k=2")
                 .header(AUTHRIZATION_HEADER, PREFIX + token)
                 .exchange()
                 .expectBodyList(RegionNameResponseDto.class)
