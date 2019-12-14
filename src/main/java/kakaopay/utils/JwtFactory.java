@@ -10,6 +10,8 @@ import kakaopay.exception.InvalidJwtException;
 import kakaopay.exception.JwtCreateException;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class JwtFactory {
     private final JwtConfig jwtConfig;
@@ -25,6 +27,7 @@ public class JwtFactory {
             token = JWT.create()
                     .withIssuer(jwtConfig.getIssuer())
                     .withClaim("userId", account.getUserId())
+                    .withClaim("createDate", new Date())
                     .sign(generateAlgorithm());
         } catch (IllegalArgumentException e) {
             throw new JwtCreateException();
