@@ -11,7 +11,7 @@ class RegionSupInfoControllerTest extends CommonControllerTest {
     void updateTest() {
         String target = "updateTarget";
         String usage = "updateUsage";
-        String limitPay = "updateLimitPay";
+        String limitPay = "1억원 이내";
 
         RegionSupportInfoResponseDto responseDto = webTestClient.put()
                 .uri("/api/regionsupinfos")

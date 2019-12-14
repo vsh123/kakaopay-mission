@@ -15,7 +15,8 @@ public class RegionSupportInformation {
     private Region region;
     private String target;
     private String usage;
-    private String limitPay;
+    @Embedded
+    private LimitPay limitPay;
     private String rate;
     private String institute;
     private String mgmt;
@@ -44,7 +45,7 @@ public class RegionSupportInformation {
 
     public void updateLimitPay(String limitPay) {
         if (!StringUtils.isEmpty(limitPay)) {
-            this.limitPay = limitPay;
+            this.limitPay = LimitPay.createLimitPay(limitPay);
         }
     }
 
@@ -67,7 +68,6 @@ public class RegionSupportInformation {
 
     }
 
-
     public Long getId() {
         return id;
     }
@@ -84,7 +84,7 @@ public class RegionSupportInformation {
         return usage;
     }
 
-    public String getLimitPay() {
+    public LimitPay getLimitPay() {
         return limitPay;
     }
 
@@ -136,7 +136,7 @@ public class RegionSupportInformation {
         private Region region;
         private String target;
         private String usage;
-        private String limitPay;
+        private LimitPay limitPay;
         private String rate;
         private String institute;
         private String mgmt;
@@ -158,7 +158,7 @@ public class RegionSupportInformation {
         }
 
         public Builder limitPay(String limitPay) {
-            this.limitPay = limitPay;
+            this.limitPay = LimitPay.createLimitPay(limitPay);
             return this;
         }
 
@@ -196,6 +196,10 @@ public class RegionSupportInformation {
         this.institute = builder.institute;
         this.mgmt = builder.mgmt;
         this.reception = builder.reception;
+    }
+
+    private String parsingLimit(String limitPay) {
+        return null;
     }
 
 }

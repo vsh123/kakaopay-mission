@@ -27,7 +27,7 @@ class RegionSupInfoServiceTest {
     void updateTest() {
         String target = "target";
         String usage = "usage";
-        String limitPay = "limitPay";
+        String limitPay = "1억원 이내";
         String rate = "rate";
         String institute = "institute";
         String mgmt = "mgmt";

@@ -50,7 +50,7 @@ class RegionSupInfoInternalServiceTest {
                 .region(region)
                 .build();
         RegionSupInfoUpdateRequestDto requestDto =
-                new RegionSupInfoUpdateRequestDto(region.getName(), "target", "usage", "limitPay", "rate",
+                new RegionSupInfoUpdateRequestDto(region.getName(), "target", "usage", "1억원 이내", "rate",
                         "institute", "mgmt", "reception");
 
         when(regionSupportInformationRepository.findByRegionCode(region.getCode())).thenReturn(Optional.ofNullable(regionSupportInformation));

@@ -38,7 +38,7 @@ class FileParsingInternalServiceTest {
         String name = "name";
         String target = "target";
         String institute = "institute";
-        String limitPay = "limitPay";
+        String limitPay = "1억원 이내";
         String mgmt = "mgmt";
         String rate = "rate";
         String reception = "reception";

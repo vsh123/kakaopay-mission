@@ -26,9 +26,11 @@ class SearchServiceTest {
     @Test
     void findByRegionName() {
         String name = "name";
+        String limitPay = "추천금액 이내";
         Region region = Region.createRegion(name);
         RegionSupportInformation regionSupportInformation = new RegionSupportInformation.Builder()
                 .region(region)
+                .limitPay(limitPay)
                 .build();
         when(regionInternalService.findByName(name)).thenReturn(region);
         when(regionSupInfoInternalService.findByRegionCode(region.getCode())).thenReturn(regionSupportInformation);

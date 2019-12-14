@@ -11,7 +11,7 @@ class RegionSupportInformationTest {
         String name = "name";
         String target = "target";
         String institute = "institute";
-        String limitPay = "limitPay";
+        String limitPay = "1억원 이내";
         String mgmt = "mgmt";
         String rate = "rate";
         String reception = "reception";
@@ -36,7 +36,7 @@ class RegionSupportInformationTest {
 
         assertThat(regionSupportInformation.getMgmt()).isEqualTo(mgmt);
         assertThat(regionSupportInformation.getInstitute()).isEqualTo(institute);
-        assertThat(regionSupportInformation.getLimitPay()).isEqualTo(limitPay);
+        assertThat(regionSupportInformation.getLimitPay().getLimit()).isEqualTo(limitPay);
         assertThat(regionSupportInformation.getRate()).isEqualTo(rate);
         assertThat(regionSupportInformation.getReception()).isEqualTo(reception);
         assertThat(regionSupportInformation.getTarget()).isEqualTo(target);
@@ -49,7 +49,7 @@ class RegionSupportInformationTest {
         String name = "name";
         String target = "target";
         String institute = "institute";
-        String limitPay = "limitPay";
+        String limitPay = "1억원 이내";
         String mgmt = "mgmt";
         String rate = "rate";
         String reception = "reception";
