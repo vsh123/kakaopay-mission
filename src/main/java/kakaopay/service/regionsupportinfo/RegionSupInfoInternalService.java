@@ -5,8 +5,13 @@ import kakaopay.domain.RegionSupportInformation;
 import kakaopay.domain.RegionSupportInformationRepository;
 import kakaopay.dto.RegionSupInfoUpdateRequestDto;
 import kakaopay.exception.NotFoundRegionSupportInformationException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -21,6 +26,14 @@ public class RegionSupInfoInternalService {
     public RegionSupportInformation findByRegionCode(String code) {
         return regionSupportInformationRepository.findByRegionCode(code)
                 .orElseThrow(NotFoundRegionSupportInformationException::new);
+    }
+
+    public List<RegionSupportInformation> findTopOf(int numberOfRegionSupInfos) {
+        Sort sort = new Sort(Sort.Direction.DESC, "limitPay_pay");
+        sort = sort.and(new Sort(Sort.Direction.ASC, "rate_averageRate"));
+        Pageable pageable = PageRequest.of(0, numberOfRegionSupInfos, sort);
+
+        return regionSupportInformationRepository.findAll(pageable).getContent();
     }
 
     public RegionSupportInformation update(Region region, RegionSupInfoUpdateRequestDto updateRequestDto) {
