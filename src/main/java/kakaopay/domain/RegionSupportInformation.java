@@ -9,6 +9,7 @@ public class RegionSupportInformation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "region_code")
     private Region region;
     private String target;
     private String usage;
