@@ -64,8 +64,8 @@ class AccountInternalServiceTest {
         Account account = new Account(userId, password);
 
         AccountDto accountDto = new AccountDto(userId, password);
-        when(passwordEncoder.encode(password)).thenReturn(password);
         when(accountRepository.findByUserId(userId)).thenReturn(Optional.ofNullable(account));
+        when(passwordEncoder.matches(password,password)).thenReturn(true);
 
         Account actualAccount = accountInternalService.login(accountDto);
 
@@ -78,7 +78,6 @@ class AccountInternalServiceTest {
         String password = "password";
 
         AccountDto accountDto = new AccountDto(userId, password);
-        when(passwordEncoder.encode(password)).thenReturn(password);
         when(accountRepository.findByUserId(userId)).thenReturn(Optional.ofNullable(null));
 
         assertThrows(NotFoundAccountException.class, () -> accountInternalService.login(accountDto));
@@ -92,7 +91,6 @@ class AccountInternalServiceTest {
         Account account = new Account(userId, password);
 
         AccountDto accountDto = new AccountDto(userId, incorrectPassword);
-        when(passwordEncoder.encode(incorrectPassword)).thenReturn(incorrectPassword);
         when(accountRepository.findByUserId(userId)).thenReturn(Optional.ofNullable(account));
 
         assertThrows(IllegalPasswordException.class, () -> accountInternalService.login(accountDto));
