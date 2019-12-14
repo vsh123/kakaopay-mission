@@ -24,7 +24,7 @@ class FileUploadControllerTest {
         File file = new File("src/test/resources/test.csv");
 
         List<RegionSupportInfoResponseDto> responseDtos = webTestClient.post()
-                .uri("/upload")
+                .uri("/api/upload")
                 .contentType(MULTIPART_FORM_DATA)
                 .body(BodyInserters.fromMultipartData("file", new FileSystemResource(file)))
                 .exchange()

@@ -17,7 +17,7 @@ public class FileUploadController {
         this.fileParsingService = fileParsingService;
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/api/upload")
     public ResponseEntity<List<RegionSupportInfoResponseDto>> fileUpload(MultipartFile file) {
         return ResponseEntity.ok(fileParsingService.parsingCsvFile(file));
     }
