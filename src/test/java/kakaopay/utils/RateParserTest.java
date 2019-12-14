@@ -10,6 +10,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class RateParserTest {
 
     @Test
+    void 대출이자_전액() {
+        String rateInfo = "대출이자 전액";
+        Rate rate = RateParser.parse(rateInfo);
+
+        assertThat(rate.getRateInfo()).isEqualTo(rateInfo);
+        assertThat(rate.getMinRate()).isEqualTo(0);
+        assertThat(rate.getMaxRate()).isEqualTo(0);
+    }
+
+    @Test
     void single_rate_test() {
         String rateInfo = "3%";
         Rate rate = RateParser.parse(rateInfo);
