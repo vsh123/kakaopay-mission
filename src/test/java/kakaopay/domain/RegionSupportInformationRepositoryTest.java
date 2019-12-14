@@ -1,5 +1,7 @@
 package kakaopay.domain;
 
+import kakaopay.exception.NotFoundRegionSupportInformationException;
+import kakaopay.exception.NotSupportRegionException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -41,5 +43,12 @@ class RegionSupportInformationRepositoryTest {
         List<RegionSupportInformation> result = regionSupportInformationRepository.findAll(pageable).getContent();
 
         assertThat(result.size()).isEqualTo(1);
+    }
+
+    @Test
+    void findMin() {
+        RegionSupportInformation min = regionSupportInformationRepository.findFirstByOrderByRateMinRateAsc()
+                .orElseThrow(NotFoundRegionSupportInformationException::new);
+        assertThat(min.getRate().getMinRate()).isEqualTo(1.0);
     }
 }
