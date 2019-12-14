@@ -17,4 +17,8 @@ public class AccountService {
     public String signUp(AccountDto accountDto) {
         return jwtFactory.createToken(accountInternalService.signUp(accountDto));
     }
+
+    public String login(AccountDto accountDto) {
+        return jwtFactory.createToken(accountInternalService.login(accountDto));
+    }
 }

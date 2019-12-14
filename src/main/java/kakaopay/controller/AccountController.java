@@ -18,4 +18,9 @@ public class AccountController {
     public ResponseEntity<String> signUp(AccountDto accountDto) {
         return ResponseEntity.ok(accountService.signUp(accountDto));
     }
+
+    @PostMapping("/api/login")
+    public ResponseEntity<String> login(AccountDto accountDto) {
+        return ResponseEntity.ok(accountService.login(accountDto));
+    }
 }
