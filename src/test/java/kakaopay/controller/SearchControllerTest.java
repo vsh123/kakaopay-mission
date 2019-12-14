@@ -16,7 +16,7 @@ class SearchControllerTest {
     @Test
     void findByRegionName() {
         RegionSupportInfoResponseDto responseDto = webTestClient.get()
-                .uri("/api/regionsupinfos/강릉시")
+                .uri("/api/regionsupinfos/search?region=강릉시")
                 .exchange()
                 .expectBody(RegionSupportInfoResponseDto.class)
                 .returnResult()
