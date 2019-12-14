@@ -2,6 +2,7 @@ package kakaopay.service.regionsupportinfo;
 
 import kakaopay.domain.Region;
 import kakaopay.domain.RegionSupportInformation;
+import kakaopay.dto.RegionNameResponseDto;
 import kakaopay.dto.RegionSupInfoUpdateRequestDto;
 import kakaopay.dto.RegionSupportInfoResponseDto;
 import kakaopay.service.region.RegionInternalService;
@@ -11,7 +12,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -56,5 +62,20 @@ class RegionSupInfoServiceTest {
 
         assertThat(responseDto.getLimit()).isEqualTo(limitPay);
         assertThat(responseDto.getInstitute()).isEqualTo(institute);
+    }
+
+    @Test
+    void 원하는_숫자에_맞는_값을가져오는지_테스트() {
+        String name = "name";
+        Region region = Region.createRegion(name);
+        RegionSupportInformation regionSupportInformation = new RegionSupportInformation.Builder()
+                .region(region)
+                .build();
+
+        when(regionSupInfoInternalService.findTopOf(anyInt())).thenReturn(Arrays.asList(regionSupportInformation));
+
+        List<RegionNameResponseDto> actualResult = regionSupInfoService.findTopOf(1);
+        assertThat(actualResult.size()).isEqualTo(1);
+        assertThat(actualResult.get(0).getRegion()).isEqualTo(name);
     }
 }

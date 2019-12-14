@@ -1,11 +1,12 @@
 package kakaopay.service.regionsupportinfo;
 
 import kakaopay.domain.Region;
-import kakaopay.dto.RegionSupInfoUpdateRequestDto;
-import kakaopay.dto.RegionSupportInfoConverter;
-import kakaopay.dto.RegionSupportInfoResponseDto;
+import kakaopay.dto.*;
 import kakaopay.service.region.RegionInternalService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RegionSupInfoService {
@@ -21,5 +22,11 @@ public class RegionSupInfoService {
         Region region = regionInternalService.findByName(updateRequestDto.getRegion());
         return RegionSupportInfoConverter
                 .toRegionSupportInfoResponseDto(regionSupInfoInternalService.update(region, updateRequestDto));
+    }
+
+    public List<RegionNameResponseDto> findTopOf(int numberOfRegionSupInfos) {
+        return regionSupInfoInternalService.findTopOf(numberOfRegionSupInfos).stream()
+                .map(regionSupInfo -> RegionConverter.toREgionNameResponseDto(regionSupInfo.getRegion()))
+                .collect(Collectors.toList());
     }
 }
