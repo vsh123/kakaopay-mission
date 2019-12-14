@@ -13,6 +13,18 @@ class RegionSupInfoControllerTest extends CommonControllerTest {
 
     public static final String BASE_URI = "/api/regionsupinfos";
 
+    @Test
+    void findAll() {
+        List<RegionSupportInfoResponseDto> result = webTestClient.get()
+                .uri(BASE_URI)
+                .header(AUTHRIZATION_HEADER, PREFIX + token)
+                .exchange()
+                .expectBodyList(RegionSupportInfoResponseDto.class)
+                .returnResult()
+                .getResponseBody();
+
+        assertThat(result.size()).isNotZero();
+    }
 
     @Test
     void findTopOf() {

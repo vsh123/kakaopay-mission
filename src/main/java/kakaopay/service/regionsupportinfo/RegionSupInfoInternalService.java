@@ -23,6 +23,11 @@ public class RegionSupInfoInternalService {
     }
 
     @Transactional(readOnly = true)
+    public List<RegionSupportInformation> findAll() {
+        return regionSupportInformationRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
     public RegionSupportInformation findByRegionCode(String code) {
         return regionSupportInformationRepository.findByRegionCode(code)
                 .orElseThrow(NotFoundRegionSupportInformationException::new);

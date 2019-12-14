@@ -30,6 +30,18 @@ class RegionSupInfoInternalServiceTest {
     private RegionSupInfoInternalService regionSupInfoInternalService;
 
     @Test
+    void findAll() {
+        Region region = Region.createRegion("name");
+        RegionSupportInformation regionSupportInformation = new RegionSupportInformation.Builder()
+                .region(region)
+                .build();
+        when(regionSupportInformationRepository.findAll()).thenReturn(Arrays.asList(regionSupportInformation));
+
+        List<RegionSupportInformation> result = regionSupInfoInternalService.findAll();
+        assertThat(result.size()).isEqualTo(1);
+    }
+
+    @Test
     void 자자체가_지원하는_정보가_없을때__입력했을_때_에러를_발생시킨다() {
         when(regionSupportInformationRepository.findByRegionCode("code")).thenReturn(Optional.ofNullable(null));
 

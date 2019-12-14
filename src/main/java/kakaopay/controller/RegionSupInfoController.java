@@ -20,6 +20,11 @@ public class RegionSupInfoController {
         this.regionSupInfoService = regionSupInfoService;
     }
 
+    @GetMapping("/api/regionsupinfos")
+    public ResponseEntity<List<RegionSupportInfoResponseDto>> findAll() {
+        return ResponseEntity.ok(regionSupInfoService.findAll());
+    }
+
     @GetMapping("/api/regionsupinfos/rank")
     public ResponseEntity<List<RegionNameResponseDto>> findTopOf(@RequestParam("k") int numberOfRegionSupInfos) {
         return ResponseEntity.ok(regionSupInfoService.findTopOf(numberOfRegionSupInfos));

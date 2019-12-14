@@ -18,6 +18,12 @@ public class RegionSupInfoService {
         this.regionSupInfoInternalService = regionSupInfoInternalService;
     }
 
+    public List<RegionSupportInfoResponseDto> findAll() {
+        return regionSupInfoInternalService.findAll().stream()
+                .map(RegionSupportInfoConverter::toRegionSupportInfoResponseDto)
+                .collect(Collectors.toList());
+    }
+
     public RegionSupportInfoResponseDto update(RegionSupInfoUpdateRequestDto updateRequestDto) {
         Region region = regionInternalService.findByName(updateRequestDto.getRegion());
         return RegionSupportInfoConverter

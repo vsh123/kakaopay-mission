@@ -30,6 +30,19 @@ class RegionSupInfoServiceTest {
     private RegionSupInfoService regionSupInfoService;
 
     @Test
+    void findAll() {
+        Region region = Region.createRegion("name");
+        RegionSupportInformation regionSupportInformation = new RegionSupportInformation.Builder()
+                .region(region)
+                .build();
+
+        when(regionSupInfoInternalService.findAll()).thenReturn(Arrays.asList(regionSupportInformation));
+
+        List<RegionSupportInfoResponseDto> result = regionSupInfoService.findAll();
+        assertThat(result.get(0).getRegion()).isEqualTo("name");
+    }
+
+    @Test
     void updateTest() {
         String target = "target";
         String usage = "usage";
