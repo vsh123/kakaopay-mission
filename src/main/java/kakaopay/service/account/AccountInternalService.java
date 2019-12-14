@@ -36,14 +36,18 @@ public class AccountInternalService {
 
     public Account login(AccountDto accountDto) {
         String userId = accountDto.getUserId();
-        String encryptedPassword = passwordEncoder.encode(accountDto.getPassword());
+        String password = accountDto.getPassword();
 
         Account account = accountRepository.findByUserId(userId)
                 .orElseThrow(NotFoundAccountException::new);
-        if (!account.isCorrectPassword(encryptedPassword)) {
+        if (!isCorrectPassword(password, account.getPassword())) {
             throw new IllegalPasswordException();
         }
 
         return account;
+    }
+
+    private boolean isCorrectPassword(String password, String encodedPassword) {
+        return passwordEncoder.matches(password, encodedPassword);
     }
 }
