@@ -3,6 +3,8 @@ package kakaopay.service.serach;
 import kakaopay.domain.Region;
 import kakaopay.domain.RegionSupportInformation;
 import kakaopay.dto.RegionSupportInfoResponseDto;
+import kakaopay.service.region.RegionInternalService;
+import kakaopay.service.regionsupportinfo.RegionSupInfoInternalService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,7 +17,9 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class SearchServiceTest {
     @Mock
-    private SearchInternalService searchInternalService;
+    private RegionInternalService regionInternalService;
+    @Mock
+    private RegionSupInfoInternalService regionSupInfoInternalService;
     @InjectMocks
     private SearchService searchService;
 
@@ -26,7 +30,8 @@ class SearchServiceTest {
         RegionSupportInformation regionSupportInformation = new RegionSupportInformation.Builder()
                 .region(region)
                 .build();
-        when(searchInternalService.findByRegionName(name)).thenReturn(regionSupportInformation);
+        when(regionInternalService.findByName(name)).thenReturn(region);
+        when(regionSupInfoInternalService.findByRegionCode(region.getCode())).thenReturn(regionSupportInformation);
 
         RegionSupportInfoResponseDto actualRegionInfoResponseDto = searchService.findByRegionName(name);
 
