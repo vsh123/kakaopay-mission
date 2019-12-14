@@ -77,4 +77,16 @@ class RegionSupInfoInternalServiceTest {
         List<RegionSupportInformation> actualResult = regionSupInfoInternalService.findTopOf(1);
         assertThat(actualResult.size()).isEqualTo(1);
     }
+
+    @Test
+    void findFirstOrderByMinRate() {
+        RegionSupportInformation regionSupportInformation = new RegionSupportInformation.Builder()
+                .rate("1%")
+                .build();
+        when(regionSupportInformationRepository.findFirstByOrderByRateMinRateAsc()).thenReturn(Optional.ofNullable(regionSupportInformation));
+
+        RegionSupportInformation minRateInfo = regionSupInfoInternalService.findMinRateInfo();
+
+        assertThat(minRateInfo.getRate().getMinRate()).isEqualTo(1.0);
+    }
 }

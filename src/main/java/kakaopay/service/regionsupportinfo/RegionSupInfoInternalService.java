@@ -28,12 +28,19 @@ public class RegionSupInfoInternalService {
                 .orElseThrow(NotFoundRegionSupportInformationException::new);
     }
 
+    @Transactional(readOnly = true)
     public List<RegionSupportInformation> findTopOf(int numberOfRegionSupInfos) {
         Sort sort = new Sort(Sort.Direction.DESC, "limitPay_pay");
         sort = sort.and(new Sort(Sort.Direction.ASC, "rate_averageRate"));
         Pageable pageable = PageRequest.of(0, numberOfRegionSupInfos, sort);
 
         return regionSupportInformationRepository.findAll(pageable).getContent();
+    }
+
+    @Transactional(readOnly = true)
+    public RegionSupportInformation findMinRateInfo() {
+        return regionSupportInformationRepository.findFirstByOrderByRateMinRateAsc()
+                .orElseThrow(NotFoundRegionSupportInformationException::new);
     }
 
     public RegionSupportInformation update(Region region, RegionSupInfoUpdateRequestDto updateRequestDto) {
