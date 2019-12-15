@@ -6,7 +6,7 @@
 
 - Spring Boot
 - JPA
-- H2 hibernate
+- H2
 
 ## 빌드 및 실행 방법
 
