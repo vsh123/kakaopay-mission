@@ -27,9 +27,8 @@ public class JwtRefreshProvider implements AuthenticationProvider {
         JwtPreRefreshToken refreshToken = (JwtPreRefreshToken) authentication;
         String token = (String) refreshToken.getPrincipal();
 
-        DecodedJWT decodedJWT = jwtFactory.decode(token);
+        DecodedJWT decodedJWT = jwtFactory.refreshVerify(token);
         String userId = decodedJWT.getClaim("userId").asString();
-
         Account account = accountRepository.findByUserId(userId)
                 .orElseThrow(InvalidJwtException::new);
         String newToken = jwtFactory.createToken(account);

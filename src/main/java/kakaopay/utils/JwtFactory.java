@@ -10,6 +10,8 @@ import kakaopay.exception.InvalidJwtException;
 import kakaopay.exception.JwtCreateException;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Component
@@ -27,7 +29,7 @@ public class JwtFactory {
             token = JWT.create()
                     .withIssuer(jwtConfig.getIssuer())
                     .withClaim("userId", account.getUserId())
-                    .withClaim("createdDate", new Date())
+                    .withExpiresAt(Date.from(LocalDateTime.now().plusHours(1L).atZone(ZoneId.systemDefault()).toInstant()))
                     .sign(generateAlgorithm());
         } catch (IllegalArgumentException e) {
             throw new JwtCreateException();
@@ -35,7 +37,7 @@ public class JwtFactory {
         return token;
     }
 
-    public DecodedJWT decode(String token) {
+    public DecodedJWT verify(String token) {
         DecodedJWT jwt = null;
 
         try {
@@ -48,6 +50,24 @@ public class JwtFactory {
             throw new InvalidJwtException();
         }
         return jwt;
+    }
+
+    public DecodedJWT refreshVerify(String token) {
+        String newToken;
+        DecodedJWT jwt = JWT.decode(token);
+        try {
+            newToken = JWT.create()
+                    .withIssuer(jwtConfig.getIssuer())
+                    .withClaim("userId", jwt.getClaim("userId").asString())
+                    .withExpiresAt(jwt.getExpiresAt())
+                    .sign(generateAlgorithm());
+            if (token.equals(newToken)) {
+                return jwt;
+            }
+        } catch (Exception e) {
+            throw new InvalidJwtException();
+        }
+        throw new InvalidJwtException();
     }
 
     private Algorithm generateAlgorithm() {

@@ -21,7 +21,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         JwtPreAuthorizeToken jwtPreAuthorizeToken = (JwtPreAuthorizeToken) authentication;
         String token = (String) jwtPreAuthorizeToken.getPrincipal();
-        DecodedJWT decode = jwtFactory.decode(token);
+        DecodedJWT decode = jwtFactory.verify(token);
 
         String userId = decode.getClaim("userId").asString();
 

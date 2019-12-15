@@ -51,8 +51,8 @@ public class CommonControllerTest {
                 .returnResult()
                 .getResponseBody();
 
-        DecodedJWT preJWT = jwtFactory.decode(token);
-        DecodedJWT newJWT = jwtFactory.decode(newToken);
+        DecodedJWT preJWT = jwtFactory.verify(token);
+        DecodedJWT newJWT = jwtFactory.verify(newToken);
         String preUserId = preJWT.getClaim("userId").asString();
         String newTokenUserId = newJWT.getClaim("userId").asString();
         assertThat(preUserId).isEqualTo(newTokenUserId);

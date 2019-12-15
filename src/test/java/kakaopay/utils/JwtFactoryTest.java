@@ -31,13 +31,24 @@ class JwtFactoryTest {
     }
 
     @Test
-    void decodeTest() {
+    void verifyTest() {
         String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzaGFrZXZhbiIsInVzZXJJZCI6InVzZXJJZCJ9.-ydGZvmEr8t8mePyT1kKivilf1Mrpj2juyOkoc8d5Vs";
 
         when(jwtConfig.getIssuer()).thenReturn("shakevan");
         when(jwtConfig.getSignKey()).thenReturn("shakevan");
 
-        DecodedJWT decodedJWT = jwtFactory.decode(token);
+        DecodedJWT decodedJWT = jwtFactory.verify(token);
+
+        assertThat(decodedJWT.getClaim("userId").asString()).isEqualTo("userId");
+    }
+
+    @Test
+    void refreshVerifyTest() {
+        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzaGFrZXZhbiIsImV4cCI6MTU3NjM5NTU5NywidXNlcklkIjoidXNlcklkIn0.RRU7zGqxi4bHaRucg2EuJJC8xV6K8j3H5b3S1NzunsQ";
+        when(jwtConfig.getIssuer()).thenReturn("shakevan");
+        when(jwtConfig.getSignKey()).thenReturn("shakevan");
+
+        DecodedJWT decodedJWT = jwtFactory.refreshVerify(token);
 
         assertThat(decodedJWT.getClaim("userId").asString()).isEqualTo("userId");
     }
